@@ -2,6 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth import (login, logout)
+#from channels.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # Create your views here.
 

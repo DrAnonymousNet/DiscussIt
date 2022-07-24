@@ -1,0 +1,26 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input id="chat-message-input" type="text" size="100"><br>
+    <input id="chat-message-submit" type="button" value="Send">
+
+    <script>
+        {% for message-event in message_and_event_list%}
+            document.querySelector('#chat-log').value += (`{{message}}` + '\n');
+        {%endfor%}
+    </script>
+        
+    <h3 id="members">Group Members</h3>
+    <ul>
+    {% for member in group_members%}
+        <li id="members-{{member.id}}">{{member}}</li>
+    {%endfor%}
+        </ul>
+</body>
+</html>
