@@ -142,7 +142,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": ["redis://:zrGanAUZ5f2dORTNwizteP9xbXDL30iu@ redis-17334.c114.us-east-1-4.ec2.cloud.redislabs.com:17334/0"],
+            "hosts": ["redis://:zrGanAUZ5f2dORTNwizteP9xbXDL30iu@redis-17334.c114.us-east-1-4.ec2.cloud.redislabs.com:17334/0"],
         },
     },
 }
@@ -158,4 +158,3 @@ if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES = {
         "default":dj_database_url.config()}
-    
