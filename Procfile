@@ -1,0 +1,1 @@
+web: daphne DiscussIt.asgi:application
