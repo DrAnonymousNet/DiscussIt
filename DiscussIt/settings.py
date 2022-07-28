@@ -128,9 +128,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
+'''
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
+}
+'''
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://:zrGanAUZ5f2dORTNwizteP9xbXDL30iu@ redis-17334.c114.us-east-1-4.ec2.cloud.redislabs.com:17334/0"],
+        },
+    },
 }
