@@ -7,6 +7,12 @@
     <title>Signup</title>
 </head>
 <body>
-    {{form}}
+    <form method="POST">
+        {% csrf_token%}
+        <fieldset>
+        {{form}}
+        </fieldset>
+        <input type="submit" value="signup"></input>
+        </form>
 </body>
 </html>

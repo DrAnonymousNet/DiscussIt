@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ec*8y576js%r0kw9+i%_sf=_r)$sa%z0-&psq1&r6c4q5=e3-8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "discussitapp.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "discussitapp.herokuapp.com"]
 
 
 # Application definition
@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-'''
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
@@ -143,3 +143,4 @@ CHANNEL_LAYERS = {
         },
     },
 }
+'''

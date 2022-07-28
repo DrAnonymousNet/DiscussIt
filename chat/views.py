@@ -4,7 +4,8 @@ from .models import Group
 from django.contrib.auth.decorators import login_required
 from .utils import get_online_user
 
-@login_required
+
+
 def HomeView(request):
     '''The home page where all groups are listed'''
     groups = Group.objects.all()

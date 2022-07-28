@@ -9,6 +9,9 @@
 <body>
     <h1 style="margin-top: 3px;">DiscusIt Home Page</h1>
     <ul>
+        {%if request.user.is_authenticated%}
+        <p><a href="{%url 'logout'%}">Logout</a></p>
+
         {%for group in groups%}
         <div id="{{group.uuid}}">
             <li><a>{{group.name}}</a></li>
@@ -22,6 +25,10 @@
             {%endif%}
         </div>
         {%endfor%}
+        {%else%}
+        <p><a href="{%url 'login'%}">Login</a></p>
+        <p><a href="{%url 'signup'%}">SignUp</a></p>
+        {%endif%}
 
 
   

@@ -1,7 +1,8 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.contrib.auth import (login, logout)
+from django.contrib.auth import (login, logout, authenticate)
+from .forms import UserLoginForm
 #from channels.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # Create your views here.
@@ -9,10 +10,15 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 def LoginView(request:HttpRequest):
     form = AuthenticationForm()
     if request.method == "POST":
-        form = AuthenticationForm(request.POST)
+        form = UserLoginForm(request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect(reverse("chat:home"))
+            user= form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=user, password=password)
+            print(user, password)
+            login(request, user)
+    
+            return redirect(reverse("home"))
     context = {
         "form":form
     }
@@ -24,7 +30,7 @@ def LogoutView(request:HttpRequest):
     The view logout the user and redirect them to the login page
     '''
     logout(request)
-    return redirect(reverse("chat:login"))
+    return redirect(reverse("login"))
 
 def SignUpView(request:HttpRequest):
     '''
@@ -34,8 +40,9 @@ def SignUpView(request:HttpRequest):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect(reverse("account:login"))
+            instance = form.save()
+            login(request, instance)
+            return redirect(reverse("login"))
     context = {
         "form":form
     }
