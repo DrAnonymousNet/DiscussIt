@@ -6,7 +6,7 @@ from .forms import UserLoginForm
 #from channels.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # Create your views here.
-he
+
 def LoginView(request:HttpRequest):
     form = AuthenticationForm()
     if request.method == "POST":
