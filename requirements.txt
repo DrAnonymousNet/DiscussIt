@@ -12,6 +12,8 @@ daphne==3.0.2
 python-decouple
 django_heroku
 Django==4.0.6
+dj_database_url
+psycopg2-binary
 hyperlink==21.0.0
 idna==3.3
 incremental==21.3.0
