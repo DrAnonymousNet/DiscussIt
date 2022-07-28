@@ -1,1 +1,1 @@
-web: daphne DiscussIt.asgi:application
+web: daphne DiscussIt.asgi:application --port $PORT --bind 0.0.0.0 -v2
