@@ -9,6 +9,7 @@ constantly==15.1.0
 cryptography==37.0.4
 daphne==3.0.2
 decouple==0.0.7
+django_heroku
 Django==4.0.6
 hyperlink==21.0.0
 idna==3.3

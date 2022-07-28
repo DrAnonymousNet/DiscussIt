@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+import django
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ec*8y576js%r0kw9+i%_sf=_r)$sa%z0-&psq1&r6c4q5=e3-8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "discussitapp.herokuapp.com"]
 
@@ -143,3 +145,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
