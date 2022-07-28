@@ -1,7 +1,6 @@
-from email import message
-from tokenize import group
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
-from .models import Group, Message,Event
+from .models import Group
 from django.contrib.auth.decorators import login_required
 from .utils import get_online_user
 
@@ -16,15 +15,21 @@ def HomeView(request):
     }
     return render(request,template_name="chat/home.html",context=context)
 
+@login_required
 def GroupChatView(request, uuid):
     group = get_object_or_404(Group, uuid=uuid)
+    if request.user not in group.members.all():
+        return HttpResponseForbidden("You are not a member of this group. Kindly use the join botton")
+
+
     messages = group.message_set.all()
     events = group.event_set.all()
+
 
     #Combine the events and messages in for a group
     message_and_event_list = [*messages, *events]
     # Sort the combination by the timestamp so that they are listed in order
-    sorted(message_and_event_list, key=lambda x : x.timestamp)
+    sorted_message_event_list = sorted(message_and_event_list, key=lambda x : x.timestamp)
 
     #get list of all group members
     group_members = group.members.all()
@@ -33,7 +38,7 @@ def GroupChatView(request, uuid):
     active_members = get_online_user(group)
 
     context = {
-        "message_and_event_list":message_and_event_list,
+        "message_and_event_list":sorted_message_event_list,
         "group_members":group_members,
         "active_members":active_members
     }

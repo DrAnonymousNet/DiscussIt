@@ -9,10 +9,6 @@
 <body>
     <h1 style="margin-top: 3px;">DiscusIt Home Page</h1>
     <ul>
-
-
-        
-
         {%for group in groups%}
         <div id="{{group.uuid}}">
             <li><a>{{group.name}}</a></li>
@@ -38,6 +34,7 @@ base_url = `${window.location.hostname}:${window.location.port}/`
 const websocket = new WebSocket(`ws://${base_url}`)
 
 
+
 function add_event_to_all_buttons(){
     /*Add event listener that send the event message to all buttons*/
     const keys = document.querySelectorAll('.group_option');
@@ -48,9 +45,8 @@ function add_event_to_all_buttons(){
     
     
 function send_event_message(event){
-        /*Send the uuid and the value of the ebutton that was clicked*/
+        /*Send the uuid and the value of the button that was clicked*/
         const { target } = event;
-        console.log(target.value.split(" "))
         group =target.value.split(" ")
         group_uuid = group[1]
         action = group[0] //Leave or Join or Open
@@ -70,7 +66,6 @@ function send_event_message(event){
  
 websocket.onopen = function(event){
     console.log("Connection Open")
-    websocket.send(JSON.stringify({"type":"auth_user","user":`{{request.user.id}}`}))
     
 }
 
@@ -79,7 +74,6 @@ websocket.onmessage = function(event){
     message = JSON.parse(event.data)
     type = data.type
     data = message.data
-    console.log(data)
     switch(type){
         case "leave_group":
             leave_group_handler(data)
@@ -120,6 +114,7 @@ function join_group_handler(uuid){
 }
 /*
 function contruct_join_button(uuid){
+    construct a join button 
     var button = document.createElement("button")
     button.innerHTML = "leave-{{uuid}}"
     button.id = 

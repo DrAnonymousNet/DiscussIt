@@ -31,7 +31,8 @@ class Group(models.Model):
         self.save()
 
     def remove_user_from_group(self, user:User):
-        '''An helper function to remove user from group members when they leave the group'''
+        '''An helper function to remove user from group members when they leave the group
+         and create an event for the timestamp the user left the group'''
         self.members.remove(user)
         self.event_set.create(type="Left", user=user)
         self.save()
@@ -46,7 +47,9 @@ class Message(models.Model):
     group = models.ForeignKey(Group ,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"Messgae {self.author}-{self.group}-{self.content}"
+        date = self.timestamp.date()
+        time = self.timestamp.time()
+        return f"{self.author}:- {self.content} @{date} {time.hour}:{time.minute}"
 
 
 
@@ -70,13 +73,4 @@ class Event(models.Model):
 
     
     def __str__(self) -> str:
-        return f"Event - {self.description}"
-
-class LoggedIn(models.Model):
-    STATUS=[
-        ("Online","online"),
-        ("Offline","offline")
-    ]
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS, max_length=10)
-
+        return f"{self.description}"
